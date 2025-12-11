@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,6 +9,10 @@ import SettingsScreen from './screens/SettingsScreen';
 import { Ionicons } from '@expo/vector-icons';
 import AppBar from './screens/AppBar';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import AuthProvider, { AuthContext } from "./context/AuthContext"; 
+import AppDrawer from "./navigation/AppDrawer"; 
+import LoginScreen from "./screens/LoginScreen"; 
+import { useContext } from "react";
 
 
 const Stack = createNativeStackNavigator();
@@ -49,5 +53,26 @@ export default function App() {
     </SafeAreaView> 
     </SafeAreaProvider>
 
+  );
+}*/
+
+import React, { useContext } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthProvider, { AuthContext } from "./context/AuthContext";
+import AppDrawer from "./navigation/AppDrawer";
+import LoginScreen from "./screens/LoginScreen";
+
+function RootNavigator() {
+  const { user } = useContext(AuthContext);
+  return user ? <AppDrawer /> : <LoginScreen />;
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
