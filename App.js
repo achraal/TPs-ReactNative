@@ -133,6 +133,7 @@ import { ThemeProvider, ThemeContext } from "./context/ThemeContext";
 import TodoListOfflineScreen from "./screens/TodoListOfflineScreen";
 function MainApp() {
    const { theme } = useContext(ThemeContext);
+   //useDrizzleStudio(db);
 return (
 <View
 style={[
