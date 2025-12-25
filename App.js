@@ -1,4 +1,6 @@
-/*import React from 'react';
+/*
+App.js version sans Redux
+import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -56,7 +58,8 @@ export default function App() {
   );
 }*/
 
-import React, { useContext } from "react";
+// App.js version avec Redux et AuthContext
+/*import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthProvider, { AuthContext } from "./context/AuthContext";
 import AppDrawer from "./navigation/AppDrawer";
@@ -79,4 +82,43 @@ export default function App() {
     </AuthProvider>
     </Provider>
   );
+}*/
+
+// App.js version avec ThemeContext et TodoListFetchScreen
+import { useContext } from "react";
+import { View, StyleSheet } from "react-native";
+import { ThemeProvider, ThemeContext } from "./context/ThemeContext";
+import TodoListFetchScreen from "./screens/TodoListFetchScreen";
+
+function MainApp() {
+const { theme } = useContext(ThemeContext);
+return (
+<View
+style={[
+  styles.container,
+theme === "dark" ? styles.dark : styles.light,
+]}
+>
+<TodoListFetchScreen />
+</View>
+);
 }
+export default function App() {
+return (
+<ThemeProvider>
+<MainApp />
+</ThemeProvider>
+);
+}
+const styles = StyleSheet.create({
+container: {
+flex: 1,
+paddingTop: 40,
+},
+light: {
+backgroundColor: "#ffffff",
+},
+dark: {
+backgroundColor: "#121212",
+},
+});
